@@ -61,7 +61,8 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-// Início do projeto da aula!
+/* Início do projeto da aula! */
+// Aula: 148
 const displayMovements = function (movements) {
   // limpar o html "antigo/anterior"
   containerMovements.innerHTML = '';
@@ -87,6 +88,19 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+// Aula: 152
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    // aqui adicionamos 'username' como nova propriedade em cada objeto a partir da existente 'owner'
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+console.log(accounts);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
