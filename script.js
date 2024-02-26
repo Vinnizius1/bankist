@@ -88,6 +88,15 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+// Aula: 154
+const calcDisplayBalance = function (movements) {
+  // calcularemos o balanço baseado nesse array
+  const balance = movements.reduce((acc, curr) => acc + curr, 0);
+  // então, atualizaremos nosso label em 'balance'
+  labelBalance.textContent = `${balance} $`;
+};
+console.log(calcDisplayBalance(account1.movements));
+
 // Aula: 152
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -100,7 +109,7 @@ const createUsernames = function (accs) {
   });
 };
 createUsernames(accounts);
-console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -110,7 +119,5 @@ const currencies = new Map([
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
-
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
 /////////////////////////////////////////////////
