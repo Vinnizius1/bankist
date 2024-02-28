@@ -93,9 +93,35 @@ const calcDisplayBalance = function (movements) {
   // calcularemos o balanço baseado nesse array
   const balance = movements.reduce((acc, curr) => acc + curr, 0);
   // então, atualizaremos nosso label em 'balance'
-  labelBalance.textContent = `${balance} $`;
+  labelBalance.textContent = `${balance}€`;
 };
-console.log(calcDisplayBalance(account1.movements));
+calcDisplayBalance(account1.movements);
+
+// Aula: 156
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, curr) => acc + curr, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, curr) => acc + curr, 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  // O "interesse" que criamos é de 1,2%
+  // O segundo "filter()" é separa apenas os valores de 1 para cima
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int, i, array) => {
+      // console.log(array); por esse array, nós conseguimos ver as parada como estão!
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDisplaySummary(account1.movements);
 
 // Aula: 152
 const createUsernames = function (accs) {
