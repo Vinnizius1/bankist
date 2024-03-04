@@ -86,7 +86,7 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
 // Aula: 154
 const calcDisplayBalance = function (movements) {
@@ -95,7 +95,7 @@ const calcDisplayBalance = function (movements) {
   // então, atualizaremos nosso label em 'balance'
   labelBalance.textContent = `${balance}€`;
 };
-calcDisplayBalance(account1.movements);
+// calcDisplayBalance(account1.movements);
 
 // Aula: 156
 const calcDisplaySummary = function (movements) {
@@ -121,7 +121,7 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}€`;
 };
-calcDisplaySummary(account1.movements);
+// calcDisplaySummary(account1.movements);
 
 // Aula: 152
 const createUsernames = function (accs) {
@@ -155,8 +155,11 @@ btnLogin.addEventListener('click', function (e) {
     labelWelcome.textContent = `Olá, ${currentAccount.owner.split(' ')[0]}!`;
     containerApp.style.opacity = 100;
     // Display movements
+    displayMovements(currentAccount.movements);
     // Display balance
+    calcDisplayBalance(currentAccount.movements);
     // Display summary
+    calcDisplaySummary(currentAccount.movements);
   }
 });
 
