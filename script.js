@@ -98,22 +98,21 @@ const calcDisplayBalance = function (movements) {
 // calcDisplayBalance(account1.movements);
 
 // Aula: 156
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, curr) => acc + curr, 0);
   labelSumIn.textContent = `${incomes}€`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, curr) => acc + curr, 0);
   labelSumOut.textContent = `${Math.abs(out)}€`;
 
-  // O "interesse" que criamos é de 1,2%
   // O segundo "filter()" é separa apenas os valores de 1 para cima
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((int, i, array) => {
       // console.log(array); por esse array, nós conseguimos ver as parada como estão!
       return int >= 1;
@@ -151,17 +150,19 @@ btnLogin.addEventListener('click', function (e) {
   // "?" Optional chaining: para evitar ERRO caso não exista o "username" digitado no input
   // logo, o PIN somente será lido se primeiro existir "currentAccount"
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    // Limpar os campos após login:
-    inputLoginUsername.value = inputLoginPin.value = '';
     // Mostrar UI e mensagem de boas-vindas
     labelWelcome.textContent = `Olá, ${currentAccount.owner.split(' ')[0]}!`;
     containerApp.style.opacity = 100;
+    // Limpar os campos após login:
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+
     // Display movements
     displayMovements(currentAccount.movements);
     // Display balance
     calcDisplayBalance(currentAccount.movements);
     // Display summary
-    calcDisplaySummary(currentAccount.movements);
+    calcDisplaySummary(currentAccount);
   }
 });
 
