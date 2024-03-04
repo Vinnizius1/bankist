@@ -151,6 +151,8 @@ btnLogin.addEventListener('click', function (e) {
   // "?" Optional chaining: para evitar ERRO caso não exista o "username" digitado no input
   // logo, o PIN somente será lido se primeiro existir "currentAccount"
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Limpar os campos após login:
+    inputLoginUsername.value = inputLoginPin.value = '';
     // Mostrar UI e mensagem de boas-vindas
     labelWelcome.textContent = `Olá, ${currentAccount.owner.split(' ')[0]}!`;
     containerApp.style.opacity = 100;
