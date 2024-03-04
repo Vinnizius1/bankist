@@ -136,6 +136,30 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+// Aula: 159
+// Esta variável precisa ser definida FORA DA FUNÇÃO, porque precisaremos dessa informação
+// sobre conta em OUTRAS operações, como em uma "transferência de dinheiro"
+let currentAccount;
+// Event handler
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  // "?" Optional chaining: para evitar ERRO caso não exista o "username" digitado no input
+  // logo, o PIN somente será lido se primeiro existir "currentAccount"
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Mostrar UI e mensagem de boas-vindas
+    labelWelcome.textContent = `Olá, ${currentAccount.owner.split(' ')[0]}!`;
+    containerApp.style.opacity = 100;
+    // Display movements
+    // Display balance
+    // Display summary
+  }
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
