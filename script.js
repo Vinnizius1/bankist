@@ -89,11 +89,9 @@ const displayMovements = function (movements) {
 // displayMovements(account1.movements);
 
 // Aula: 154
-const calcDisplayBalance = function (movements) {
-  // calcularemos o balanço baseado nesse array
-  const balance = movements.reduce((acc, curr) => acc + curr, 0);
-  // então, atualizaremos nosso label em 'balance'
-  labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, curr) => acc + curr, 0);
+  labelBalance.textContent = `${acc.balance}€`;
 };
 // calcDisplayBalance(account1.movements);
 
@@ -160,10 +158,34 @@ btnLogin.addEventListener('click', function (e) {
     // Display movements
     displayMovements(currentAccount.movements);
     // Display balance
-    calcDisplayBalance(currentAccount.movements);
+    calcDisplayBalance(currentAccount);
     // Display summary
     calcDisplaySummary(currentAccount);
   }
+});
+
+// Aula: 160
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    // "inputTransferTo.value" é o que fará acontecer, pois terá o username digitado, para
+    // então fazer a busca pelo método find() dentro do array de contas "accounts"
+    acc => acc.username === inputTransferTo.value
+  );
+  console.log(receiverAcc, btnTransfer.value);
+
+  // if (
+  //   amount > 0 &&
+  //   currentAccount.balance >= amount &&
+  //   receiverAcc &&
+  //   receiverAcc?.username !== currentAccount.username
+  // ) {
+  //   console.log('sim');
+  // } else {
+  //   console.log('no');
+  // }
 });
 
 /////////////////////////////////////////////////
