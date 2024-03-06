@@ -136,13 +136,23 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+// Refatoração de 3 funções para 1 somente. Agora podemos chamá-la onde quisermos
+const updateUI = function (acc) {
+  // Display movements
+  displayMovements(acc.movements);
+  // Display balance
+  calcDisplayBalance(acc);
+  // Display summary
+  calcDisplaySummary(acc);
+};
+
 // Aula: 159
 // Esta variável precisa ser definida FORA DA FUNÇÃO, porque precisaremos dessa informação
 // sobre conta em OUTRAS operações, como em uma "transferência de dinheiro"
 /* 'currentAccount' será uma REFERÊNCIA para o MESMO OBJETO que apontar na "memória HEAP".
 Logo essa variável não será uma cópia do próprio objeto, apenas uma variável apontando pro mesmo endereço da memória heap.
 Ela literalmente será um destes 4 objetos: 
-const accounts = [account1, account2, account3, account4];
+const accounts = [account1, account2, account3, account4];   
 */
 let currentAccount;
 // Event handler
@@ -163,12 +173,8 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
-    // Display movements
-    displayMovements(currentAccount.movements);
-    // Display balance
-    calcDisplayBalance(currentAccount);
-    // Display summary
-    calcDisplaySummary(currentAccount);
+    // REFATORANDO as funções de atualização dos valores na tela
+    updateUI(currentAccount);
   }
 });
 
@@ -182,7 +188,8 @@ btnTransfer.addEventListener('click', function (e) {
     // então fazer a busca pelo método find() dentro do array de contas "accounts"
     acc => acc.username === inputTransferTo.value
   );
-  console.log(receiverAcc, inputTransferTo.value);
+  // Limpando os campos de input
+  inputTransferAmount.value = inputTransferTo.value = '';
 
   if (
     amount > 0 &&
@@ -190,7 +197,16 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc &&
     receiverAcc?.username !== currentAccount.username
   ) {
-    console.log('sim');
+    // Fazendo a transferência
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    // Mostrando o update na tela
+    // Mas é uma prática RUIM! Vamos refatorar
+    /*   displayMovements(currentAccount.movements);
+    calcDisplayBalance(currentAccount);
+    calcDisplaySummary(currentAccount); */
+    updateUI(currentAccount);
   } else {
     console.log('no');
   }
