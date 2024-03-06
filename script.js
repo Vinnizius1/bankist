@@ -90,6 +90,9 @@ const displayMovements = function (movements) {
 
 // Aula: 154
 const calcDisplayBalance = function (acc) {
+  // adicionamos nova propriedade 'balance' a cada objeto de conta, para ter acesso no momento
+  // da "transferência". Por isso tb refatoramos essa função passando toda a conta (acc) como
+  // argumento
   acc.balance = acc.movements.reduce((acc, curr) => acc + curr, 0);
   labelBalance.textContent = `${acc.balance}€`;
 };
@@ -174,18 +177,18 @@ btnTransfer.addEventListener('click', function (e) {
     // então fazer a busca pelo método find() dentro do array de contas "accounts"
     acc => acc.username === inputTransferTo.value
   );
-  console.log(receiverAcc, btnTransfer.value);
+  console.log(receiverAcc, inputTransferTo.value);
 
-  // if (
-  //   amount > 0 &&
-  //   currentAccount.balance >= amount &&
-  //   receiverAcc &&
-  //   receiverAcc?.username !== currentAccount.username
-  // ) {
-  //   console.log('sim');
-  // } else {
-  //   console.log('no');
-  // }
+  if (
+    amount > 0 &&
+    currentAccount.balance >= amount &&
+    receiverAcc &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    console.log('sim');
+  } else {
+    console.log('no');
+  }
 });
 
 /////////////////////////////////////////////////
