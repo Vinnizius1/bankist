@@ -92,7 +92,7 @@ const displayMovements = function (movements) {
 const calcDisplayBalance = function (acc) {
   // adicionamos nova propriedade 'balance' a cada objeto de conta, para ter acesso no momento
   // da "transferência". Por isso tb refatoramos essa função passando toda a conta (acc) como
-  // argumento
+  // argumento. Antes ela existia apenas aqui, dentro desta função!
   acc.balance = acc.movements.reduce((acc, curr) => acc + curr, 0);
   labelBalance.textContent = `${acc.balance}€`;
 };
@@ -139,6 +139,11 @@ createUsernames(accounts);
 // Aula: 159
 // Esta variável precisa ser definida FORA DA FUNÇÃO, porque precisaremos dessa informação
 // sobre conta em OUTRAS operações, como em uma "transferência de dinheiro"
+/* 'currentAccount' será uma REFERÊNCIA para o MESMO OBJETO que apontar na "memória HEAP".
+Logo essa variável não será uma cópia do próprio objeto, apenas uma variável apontando pro mesmo endereço da memória heap.
+Ela literalmente será um destes 4 objetos: 
+const accounts = [account1, account2, account3, account4];
+*/
 let currentAccount;
 // Event handler
 btnLogin.addEventListener('click', function (e) {
