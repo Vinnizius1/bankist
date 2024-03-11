@@ -207,9 +207,31 @@ btnTransfer.addEventListener('click', function (e) {
     calcDisplayBalance(currentAccount);
     calcDisplaySummary(currentAccount); */
     updateUI(currentAccount);
-  } else {
-    console.log('no');
   }
+});
+
+// Aula 161
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+
+    // Delete account
+    // o método 'splice()' já muta/transforma o array, por isso não precisamos salvar o resultado em nenhum lugar
+    accounts.splice(index, 1);
+
+    // logout (hide UI)
+    containerApp.style.opacity = 0;
+  }
+
+  // Limpar os campos caso o usuário erre as credencias
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 /////////////////////////////////////////////////
