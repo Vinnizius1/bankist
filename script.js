@@ -178,7 +178,7 @@ btnLogin.addEventListener('click', function (e) {
   }
 });
 
-// Aula: 160
+// Aula: 160 (transfer money) com método "find"
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -210,7 +210,21 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
-// Aula 161
+// Aula 162 (Loan) com método "some"
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    currentAccount.movements.push(amount);
+
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+// Aula 161 (Delete) com método "findIndex"
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
