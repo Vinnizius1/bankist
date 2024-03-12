@@ -63,12 +63,16 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /* Início do projeto da aula! */
 // Aula: 148
-const displayMovements = function (movements) {
+// Aula: 164 implementando o método sort()
+const displayMovements = function (movements, sort = false) {
   // limpar o html "antigo/anterior"
   containerMovements.innerHTML = '';
 
+  /* sort() */
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
   // escrever o html "novo/atual"
-  movements.forEach(function (movement, i) {
+  movs.forEach(function (movement, i) {
     // qual será o tipo
     const type = movement > 0 ? 'deposit' : 'withdrawal';
 
@@ -246,6 +250,15 @@ btnClose.addEventListener('click', function (e) {
 
   // Limpar os campos caso o usuário erre as credencias
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+// Continuação da aula 164 com método sort()
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  // agora precisamos inverter 'sorted' para retornar ao valor 'false' novamente!
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
