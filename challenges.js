@@ -28,7 +28,6 @@ const movementsUI = Array.from(
   - Subtract min from max (amplitude) and return it
 */
 const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 9, 'er', -1000];
-// const temperatures = [3, 9, 13, 17, 9, 'er', -10];
 
 // Início da resolução
 const calcTempAmplitude = function (temps) {

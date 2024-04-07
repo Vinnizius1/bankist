@@ -94,9 +94,9 @@ const displayMovements = function (movements, sort = false) {
 
 // Aula: 154
 const calcDisplayBalance = function (acc) {
-  // adicionamos nova propriedade 'balance' a cada objeto de conta, para ter acesso no momento
+  // adicionamos nova propriedade 'balance' ao objeto desta conta ESPECÍFICA, para ter acesso no momento
   // da "transferência". Por isso tb refatoramos essa função passando toda a conta (acc) como
-  // argumento. Antes ela existia apenas aqui, dentro desta função!
+  // argumento. Antes ela existia apenas aqui, dentro desta função, agora existe NESTA conta singularmente!
   acc.balance = acc.movements.reduce((acc, curr) => acc + curr, 0);
   labelBalance.textContent = `${acc.balance}€`;
 };
