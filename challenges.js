@@ -64,17 +64,28 @@ console.log(amplitude);
   Capitalizar a primeira letra de cada palavra de uma frase, com algumas exceções
 */
 const convertTitleCase = function (title) {
-  const exceptions = ['a', 'e', 'o', 'mas', 'pois', 'em', 'com', 'ao'];
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = [
+    'a',
+    'e',
+    'o',
+    'mas',
+    'pois',
+    'em',
+    'com',
+    'ao',
+    'sua',
+    'seu',
+  ];
 
   const titleCase = title
     .toLowerCase()
     .split(' ')
-    .map(word =>
-      exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
-    )
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
     .join(' ');
 
-  return titleCase;
+  return capitalize(titleCase);
 };
 
 console.log(
