@@ -69,7 +69,9 @@ const convertTitleCase = function (title) {
   const titleCase = title
     .toLowerCase()
     .split(' ')
-    .map(word => word[0].toUpperCase() + word.slice(1))
+    .map(word =>
+      exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+    )
     .join(' ');
 
   return titleCase;
