@@ -59,3 +59,24 @@ const amplitude = calcTempAmplitude(temperatures);
 console.log(amplitude);
 
 // ------------------
+
+/* PROBLEMA
+  Capitalizar a primeira letra de cada palavra de uma frase, com algumas exceções
+*/
+const convertTitleCase = function (title) {
+  const exceptions = ['a', 'e', 'o', 'mas', 'pois', 'em', 'com', 'ao'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => word[0].toUpperCase() + word.slice(1))
+    .join(' ');
+
+  return titleCase;
+};
+
+console.log(
+  convertTitleCase(
+    'Com vontade e trabalho a sua vida melhora mas atente-se ao equilíbrio pois pode ser prejudicial!'
+  )
+);
