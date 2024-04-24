@@ -93,3 +93,14 @@ console.log(
     'Com vontade e trabalho a sua vida melhora mas atente-se ao equilíbrio pois pode ser prejudicial!'
   )
 );
+
+/* PROBLEMA
+  Colorir as linhas pares e ímpares
+*/
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+
+    if (i % 3 === 0) row.style.backgroundColor = 'grey';
+  });
+});
